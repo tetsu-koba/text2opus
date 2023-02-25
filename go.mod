@@ -1,4 +1,4 @@
-module example.com/text2mp3
+module example.com/text2opus
 
 go 1.20
 

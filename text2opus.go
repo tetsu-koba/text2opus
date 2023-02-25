@@ -9,7 +9,7 @@ import (
 	"cloud.google.com/go/texttospeech/apiv1/texttospeechpb"
 )
 
-func text2mp3(ctx context.Context, input_filename, output_filename string) {
+func text2opus(ctx context.Context, input_filename, output_filename string) {
 	data, err := os.ReadFile(input_filename)
 	if err != nil {
 		log.Fatal(err)
@@ -29,7 +29,7 @@ func text2mp3(ctx context.Context, input_filename, output_filename string) {
 			SsmlGender:   texttospeechpb.SsmlVoiceGender_NEUTRAL,
 		},
 		AudioConfig: &texttospeechpb.AudioConfig{
-			AudioEncoding: texttospeechpb.AudioEncoding_MP3,
+			AudioEncoding: texttospeechpb.AudioEncoding_OGG_OPUS,
 		},
 	}
 
@@ -45,8 +45,12 @@ func text2mp3(ctx context.Context, input_filename, output_filename string) {
 }
 
 func main() {
+	if len(os.Args) != 3 {
+		log.Printf("Usage:%s input_text_file output_opus_file\n", os.Args[0])
+		os.Exit(1)
+	}
 	ctx := context.Background()
-	inputfile_name := "hello.txt"
-	output_filename := "hello.mp3"
-	text2mp3(ctx, inputfile_name, output_filename)
+	inputfile_name := os.Args[1]
+	output_filename := os.Args[2]
+	text2opus(ctx, inputfile_name, output_filename)
 }

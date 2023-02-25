@@ -1,4 +1,5 @@
 *~
 go.sum
-text2mp3
-*.mp3
+text2opus
+*.opus
+*.txt

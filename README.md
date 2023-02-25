@@ -1,12 +1,13 @@
 # text2opus
 Convert text to opus audio file with Google text-to-speech API
 
-## Build
+## Install
 
 ```
-$ go build
-$ (cd list_voices && go build)
+$ go install github.com/tetsu-koba/text2opus@latest
 ```
+
+It is expected to be installed in $GOPATH/bin or $HOME/go/bin.
 
 ## Usage
 
@@ -19,31 +20,27 @@ $ cat $GOOGLE_APPLICATION_CREDENTIALS
 ```
 
 ```
-$ ./text2opus 
-2023/02/25 16:20:17 Usage:./text2opus input_text_file output_opus_file [voice_name]
+$ text2opus
+2023/02/25 20:44:36 Usage:
+2023/02/25 20:44:36   text2opus input_text_file output_opus_file [voice_name]
+2023/02/25 20:44:36   text2opus -l [languageCode (ex. 'en-US')]
 ```
 
-example
-
-
-```
-$ ./text2opus hello.txt hello.opus
-```
-
-You can specify a voice name as the 3rd argument.
-```
-$ ./text2opus hello.txt hello_sa.opus en-US-Standard-A
-```
-
-You can see the list of voices with the `list_voices' command.
+To convert a text file into opus audio file, just do:
 
 ```
-$ ./list_voices/list_voices 
-2023/02/25 16:31:37 Usage:./list_voices/list_voices languageCode (ex. 'en-US', '' means all)
+$ text2opus hello.txt hello.opus
 ```
 
+You can specify a voice name as the 3rd paramater.
 ```
-$ ./list_voices/list_voices en-US |head
+$ text2opus hello.txt hello_sa.opus en-US-Standard-A
+```
+
+You can see the list of voices with the `-l' option.
+
+```
+$ text2opus -l en-US |head
 language_codes:"en-US"  name:"en-US-Standard-A"  ssml_gender:MALE  natural_sample_rate_hertz:24000
 language_codes:"en-US"  name:"en-US-Standard-B"  ssml_gender:MALE  natural_sample_rate_hertz:24000
 language_codes:"en-US"  name:"en-US-Standard-C"  ssml_gender:FEMALE  natural_sample_rate_hertz:24000
@@ -56,9 +53,9 @@ language_codes:"en-US"  name:"en-US-Standard-I"  ssml_gender:MALE  natural_sampl
 language_codes:"en-US"  name:"en-US-Standard-J"  ssml_gender:MALE  natural_sample_rate_hertz:24000
 ```
 
-If you want to see the full list of voices, specify '' (zero length string) as the language code.
+If you want to see the full list of voices, just specify '-l'.
 
 ```
-$ ./list_voices/list_voices '' |wc -l
+$ text2opus -l |wc -l
 407
 ```

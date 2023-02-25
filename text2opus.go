@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 
@@ -44,12 +45,41 @@ func text2opus(ctx context.Context, input_filename, output_filename, name string
 	}
 }
 
+func listVoices(ctx context.Context, languageCode string) {
+	client, err := texttospeech.NewClient(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Close()
+
+	req := texttospeechpb.ListVoicesRequest{LanguageCode: languageCode}
+
+	resp, err := client.ListVoices(ctx, &req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, x := range resp.Voices {
+		fmt.Println(x)
+	}
+}
+
 func main() {
-	if len(os.Args) < 3 {
-		log.Printf("Usage:%s input_text_file output_opus_file [voice_name]\n", os.Args[0])
+	if len(os.Args) < 2 {
+		log.Printf("Usage:\n")
+		log.Printf("  %s input_text_file output_opus_file [voice_name]\n", os.Args[0])
+		log.Printf("  %s -l [languageCode (ex. 'en-US')]\n", os.Args[0])
+
 		os.Exit(1)
 	}
 	ctx := context.Background()
+	if os.Args[1] == "-l" {
+		languageCode := ""
+		if len(os.Args) > 2 {
+			languageCode = os.Args[2]
+		}
+		listVoices(ctx, languageCode)
+		return
+	}
 	inputfile_name := os.Args[1]
 	output_filename := os.Args[2]
 	name := ""

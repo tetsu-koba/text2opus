@@ -59,3 +59,12 @@ If you want to see the full list of voices, just specify '-l'.
 $ text2opus -l |wc -l
 407
 ```
+
+## Update
+
+Remove the executable file and then 'go install ... ' again.
+
+```
+$ rm $(which text2opus)
+$ go install github.com/tetsu-koba/text2opus@latest
+```

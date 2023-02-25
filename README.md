@@ -8,6 +8,7 @@ $ go install github.com/tetsu-koba/text2opus@latest
 ```
 
 It is expected to be installed in $GOPATH/bin or $HOME/go/bin.
+It is tested on Linux x86_64 and Mac AArch64.
 
 ## Usage
 

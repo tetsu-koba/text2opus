@@ -7,12 +7,12 @@ Convert text to opus audio file with Google text-to-speech API
 $ go install github.com/tetsu-koba/text2opus@latest
 ```
 
-It is expected to be installed in $GOPATH/bin or $HOME/go/bin.
-It is tested on Linux x86_64 and Mac AArch64.
+It is expected to be installed in $GOPATH/bin or $HOME/go/bin.  It has been tested on Linux x86_64 and Mac AArch64 platforms.
 
 ## Usage
 
-Make sure the $GOOGLE_APPLICATION_CREDENTIALS environment variable is set correctly.
+Ensure the `$GOOGLE_APPLICATION_CREDENTIALS` environment variable is set correctly.
+
 ```
 $ cat $GOOGLE_APPLICATION_CREDENTIALS
 {
@@ -27,18 +27,19 @@ $ text2opus
 2023/02/25 20:44:36   text2opus -l [languageCode (ex. 'en-US')]
 ```
 
-To convert a text file into opus audio file, just do:
+To convert a text file into opus audio file, simpley run:
 
 ```
 $ text2opus hello.txt hello.opus
 ```
 
 You can specify a voice name as the 3rd paramater.
+
 ```
 $ text2opus hello.txt hello_sa.opus en-US-Standard-A
 ```
 
-You can see the list of voices with the `-l' option.
+To see the list of available voices, use the -l option.
 
 ```
 $ text2opus -l en-US |head
@@ -54,7 +55,7 @@ language_codes:"en-US"  name:"en-US-Standard-I"  ssml_gender:MALE  natural_sampl
 language_codes:"en-US"  name:"en-US-Standard-J"  ssml_gender:MALE  natural_sample_rate_hertz:24000
 ```
 
-If you want to see the full list of voices, just specify '-l'.
+To view the full list of voices, just specify -l.
 
 ```
 $ text2opus -l |wc -l
@@ -63,7 +64,7 @@ $ text2opus -l |wc -l
 
 ## Update
 
-Remove the executable file and then 'go install ... ' again.
+To update text2opus, remove the executable file and then run go install again.
 
 ```
 $ rm $(which text2opus)
